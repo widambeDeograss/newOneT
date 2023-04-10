@@ -19,7 +19,7 @@ const Login = () => {
         <div className={`container ${isSignUpMode ? 'sign-up-mode' : ''}`}>
             <div className="forms-container">
                 <div className="signin-signup">
-                    <form action="#" className="sign-in-form">
+                    <form action="/home/" className="sign-in-form">
                         <h2 className="title">Sign in</h2>
                         <div className="input-field">
                             <FontAwesomeIcon icon={faUser} />

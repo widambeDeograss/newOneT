@@ -39,7 +39,7 @@ function Navbar(props) {
                             </li>
                            
                             <li className="nav-link">
-                                <a href="#">
+                                <a href="home/books">
                                     <FiBook className="icon" />
                                     <span className="text nav-text">Books</span>
                                 </a>

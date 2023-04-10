@@ -7,6 +7,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.gone{
+    display: none;
+}
+
 :root{
     /* ===== Colors ===== */
     --body-color: #E4E9F7;
