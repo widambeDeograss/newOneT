@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './navbar.css'
+import '../navbar.css'
 import { FiHome ,FiBook, FiDollarSign, FiLogOut,FiChevronRight,FiSearch,FiMoon,FiSun } from 'react-icons/fi';
 
 function Navbar(props) {
@@ -32,18 +32,21 @@ function Navbar(props) {
                         </li>
                         <ul className="menu-links">
                             <li className="nav-link">
-                                <a href="/account">
+                                <a href="/admin">
                                     <FiHome className="icon" />
                                     <span className="text nav-text">Dashboard</span>
                                 </a>
                             </li>
-                           
+
+                            
                             <li className="nav-link">
-                                <a href="/account/books">
+                                <a href="/admin/Admin-books">
                                     <FiBook className="icon" />
                                     <span className="text nav-text">Books</span>
                                 </a>
                             </li>
+
+                           
                            
                         </ul>
                     </div>

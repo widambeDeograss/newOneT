@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { Dashboard } from './Dashboard'
+import Dashboard  from './Dashboard'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './account.css'
 import { Books } from './Books';
@@ -11,7 +11,7 @@ export const Account = () => {
         <div className='account'>
             <Navbar>
                 <Routes>
-                    <Route path='dashboard' element={<Dashboard/>}/>
+                    <Route path='' element={<Dashboard/>}/>
                     <Route path='books/*' element={<Books/>}/>
                 </Routes>
             </Navbar>
