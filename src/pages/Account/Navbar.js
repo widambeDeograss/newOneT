@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './navbar.css'
 import { FiHome ,FiBook, FiDollarSign, FiLogOut,FiChevronRight,FiSearch,FiMoon,FiSun } from 'react-icons/fi';
-
 function Navbar(props) {
     const [sidebar, setSidebar] = useState(true);
     const [darkMode, setDarkMode] = useState(false);
