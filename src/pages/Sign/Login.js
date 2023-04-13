@@ -6,30 +6,33 @@ import './login.css';
 import { Input, Button } from "@material-tailwind/react";
 
 const Login = () => {
-    const [isSignUpMode, setIsSignUpMode] = useState(false);
+    const [username,setUsername ] = useState()
+    const [password,setPassword ] = useState()
 
-    const handleSignUpMode = () => {
-        setIsSignUpMode(true);
-    };
+    const [anime,setAnime] = useState(true)
 
-    const handleSignInMode = () => {
-        setIsSignUpMode(false);
-    };
+    setTimeout(()=>{
+        setAnime(false)
+    }, 50);
 
     return (
-        <div className={`container ${isSignUpMode ? 'sign-up-mode' : ''}`}>
+        <div className={`container ${anime ? 'sign-up-mode' : ''}`}>
             <div className="forms-container">
                 <div className="signin-signup">
                     <form action="/account/" className="sign-in-form">
                         <h2 className="title">Sign in</h2>
 
                         <div className="w-72 extra">
-                            <Input label="Username" />
+                            <Input label="Username" onChange={(e)=>{
+                                setUsername(e.target.value)
+                            }}/>
                         </div>
 
 
                         <div className="w-72 extra">
-                            <Input type='password' label="Password" />
+                            <Input type='password' label="Password" onChange={(e)=>{
+                                setPassword(e.target.value)
+                            }}/>
                         </div>
 
                         <div className="flex w-max gap-4 extra">

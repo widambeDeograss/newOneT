@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import { useState } from 'react';
+import PdfViewer from './PdfViewer';
+import DocPdf from './somefile.pdf'
+import ReactPDF from '@react-pdf/renderer';
 
 
-function Book() {
+const Book = () => {
 
-
-  return (
-    <div>
-     hello world
-    </div>
-  );
-}
+	return (
+		<div>
+			{ReactPDF.render(<PdfViewer />, `./somefile.pdf`)}
+		</div>
+	);
+};
 
 export default Book;
