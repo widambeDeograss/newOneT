@@ -38,7 +38,7 @@ export default function SinglePage(props) {
         options={{ workerSrc: "/pdf.worker.js" }}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page pageNumber={pageNumber} scale={2}/>
+        <Page pageNumber={pageNumber} scale={1}/>
       </Document>
       <div className="flex w-max gap-4 p-4">
       <Typography className="text-sm font-medium text-gray-900">

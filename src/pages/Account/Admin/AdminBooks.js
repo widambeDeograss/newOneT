@@ -8,9 +8,13 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import AddBooks from "./AddBooks";
+import { useGetAllbooksQuery } from "../../../api/books/bookApiSlice"; 
+
 
 const AdminBooks = () => {
-  const books = ["art", "science", "history", "Geography"];
+  // const books = ["art", "science", "history", "Geography"];
+  const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
+  console.log(books);
 
   return (
     <div>

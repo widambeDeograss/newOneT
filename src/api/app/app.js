@@ -3,7 +3,7 @@ import {logOut, loginAuth} from "../auth/AuthSlice";
 
 
 const  baseQuery = fetchBaseQuery({
-    baseUrl: "http://128.199.15.73:9010/",
+    baseUrl: "http://192.168.1.111:8000/",
     credentials:'include',
     prepareHeaders:(headers, {getState}) => {
         const token = getState().auth.token

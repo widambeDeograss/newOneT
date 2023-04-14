@@ -5,11 +5,11 @@ import { Document, Page, pdfjs } from "react-pdf";
 
 
 
-const Book = () => {
+const Book = (props) => {
 	
 	return (
 		<div>
-			 <PdfViewer />
+			 <PdfViewer pdfUrl={props.data}/>
 		</div>
 	)
 };

@@ -2,6 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Book from "./Book";
 import { BookList } from "./BookList";
+import { useSelector } from "react-redux";
+import { selectCurrentToken, selectCurrentUser } from "../../api/auth/AuthSlice";
+import { useGetAllbooksQuery } from "../../api/books/bookApiSlice"; 
 
 import {
   Tabs,
@@ -13,7 +16,11 @@ import {
 
 export const Books = () => {
   const Subscribed = ["candle", "makertmover"];
+  const [UnSubscribedBooks, setUnSubscribedBooks] = React.useState([]);
   const UnSubscribed = ["art", "science", "history", "Geography"];
+
+  const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
+  console.log(books);
 
   return (
     <div>
@@ -40,15 +47,16 @@ export const Books = () => {
                 </TabPanel>
 
                 <TabPanel key={2} value={2}>
-                  <BookList data={UnSubscribed} />
+                  <BookList data={books} />
                 </TabPanel>
               </TabsBody>
             </Tabs>
           }
         />
 
-        {UnSubscribed.map((each) => (
-          <Route key={each} path={`/${each}`} element={<Book data={each} />} />
+        {books?.map((each) => (
+          <Route key={each.id} path={`/${each.title}`}
+           element={<Book data={each.book} />} />
         ))}
       </Routes>
     </div>

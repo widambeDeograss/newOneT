@@ -3,6 +3,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import pdf from './Netwoc perfomance on transMed Report.pdf'
 import SinglePagePDFViewer from './PdfSinglePage'
 import "./pdfV.css";
+import { baseUrl } from '../../../appState/baseUrl';
 
 
 // function AllPages(props) {
@@ -29,9 +30,10 @@ import "./pdfV.css";
 
 
 // Create Document Component
-const PdfViewer = () => {
+const PdfViewer = (props) => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const pdfUrl = baseUrl + props.pdfUrl
 
   useEffect(() => {
       // for the contextmenu event
@@ -58,7 +60,7 @@ const PdfViewer = () => {
 
   return (
     <div className='pdfContainer'>
-    <SinglePagePDFViewer pdf={pdf} />
+    <SinglePagePDFViewer pdf={pdfUrl} />
     <hr />
   </div>
   );
