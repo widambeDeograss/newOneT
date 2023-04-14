@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginAuth } from '../../api/auth/AuthSlice';
+import {useLoginMutation } from  '../../api/auth/AuthApiSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faTwitter, faGoogle, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
@@ -6,20 +10,65 @@ import './login.css';
 import { Input, Button } from "@material-tailwind/react";
 
 const Login = () => {
+    const [isSignUpMode, setIsSignUpMode] = useState(false);
+    const useRef = React.useRef();
+    const errRef = React.useRef();
+    const [errorMsg, setErrorMsg] = React.useState();
     const [username,setUsername ] = useState()
     const [password,setPassword ] = useState()
+    const navigate = useNavigate()
 
     const [anime,setAnime] = useState(true)
 
     setTimeout(()=>{
         setAnime(false)
     }, 50);
+    const [login, { isLoading }] = useLoginMutation();
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('Submmmm');
+        const body = {
+            body:{
+             data:{
+            'username':username,
+            'password':password
+          }
+        }
+        }
+        console.log(body);
+        try {
+          const userData = await login({ body }).unwrap();
+          console.log(userData);
+
+          localStorage.setItem('user', JSON.stringify(userData) )
+          localStorage.setItem('token', userData.token)
+          dispatch(loginAuth({ ...userData }));
+           setUsername('');
+           setPassword('');
+          navigate('/');
+
+        } catch (error) {
+            console.log(error);
+          if (!error?.respose) {
+            setErrorMsg("No server respose try again later");
+          } else if (error.respose?.status === 401) {
+            setErrorMsg("incorrect password or email ");
+          } else {
+            setErrorMsg("login failed try again later");
+          }
+          errRef.current.focus();
+        }
+        
+      };
+    
 
     return (
         <div className={`container ${anime ? 'sign-up-mode' : ''}`}>
             <div className="forms-container">
                 <div className="signin-signup">
-                    <form action="/account/" className="sign-in-form">
+                    <form onSubmit={handleSubmit} className="sign-in-form">
                         <h2 className="title">Sign in</h2>
 
                         <div className="w-72 extra">

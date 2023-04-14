@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import PdfViewer from './PdfViewer';
-import DocPdf from './somefile.pdf'
-import ReactPDF from '@react-pdf/renderer';
+import React,  { useState, useEffect } from 'react';
+import PdfViewer from './pdfView/PdfViewer';
+import { Document, Page, pdfjs } from "react-pdf";
+
+
 
 
 const Book = () => {
-
+	
 	return (
 		<div>
-			{ReactPDF.render(<PdfViewer />, `./somefile.pdf`)}
+			 <PdfViewer />
 		</div>
-	);
+	)
 };
 
 export default Book;
