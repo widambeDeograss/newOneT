@@ -15,6 +15,10 @@ const AdminBooks = () => {
   // const books = ["art", "science", "history", "Geography"];
   const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
   console.log(books);
+  if(loadUnSubBooks){
+    return <h1>Loading ...</h1>
+  }
+
 
   return (
     <div>

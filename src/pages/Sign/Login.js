@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginAuth } from "../../api/auth/AuthSlice";
 import { useLoginMutation } from "../../api/auth/AuthApiSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { displayAlert,  toggleAlert } from "../../api/store/appStateSlice";
 import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
@@ -40,10 +41,11 @@ const Login = () => {
     };
     console.log(body);
     try {
+      let severity = "info";
       const userData = await login(body).unwrap();
       console.log(userData);
 
-      localStorage.setItem("user", JSON.stringify(userData));
+    //   localStorage.setItem("user", JSON.stringify(userData));
       localStorage.setItem("token", userData.tokens.access);
       dispatch(loginAuth({ ...userData }));
       setUsername("");
@@ -53,6 +55,10 @@ const Login = () => {
       } else if (userData.profile_id.type == "normal") {
         navigate("/account");
       }
+
+      dispatch(displayAlert({message: userData.profile_id.type, severity: severity}));
+      dispatch(toggleAlert());
+
     } catch (error) {
       console.log(error);
       if (!error?.respose) {

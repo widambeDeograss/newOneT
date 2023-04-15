@@ -6,11 +6,13 @@ import Login from "./pages/Sign/Login";
 import Registation from "./pages/Sign/Registration";
 import Admin from "./pages/Account/Admin/Admin";
 import RequireAuth from "./api/auth/RequireAuth";
+import { CustomAlertBar } from "./pages/Account/Components/Alerts";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <CustomAlertBar/>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Account />} />
