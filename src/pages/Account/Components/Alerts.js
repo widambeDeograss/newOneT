@@ -20,8 +20,9 @@ export const CustomAlertBar = () => {
     return(
         <React.Fragment>
             <Alert
+                style={{position:'fixed!important',left:'0px', top:'0px',zIndex:'1000'}}
                 show={state}
-                color={severity === 'success'?'green':severity === 'error'?'red':'gray'}
+                color={severity === 'success'?'green':severity === 'error'?'red':'red'}
                 onClose={handleAlertState}
                 dismissible={{
                     onClose: () => handleAlertState(),
@@ -30,7 +31,9 @@ export const CustomAlertBar = () => {
                         Close
                       </Button>
                     ),
-                  }}            
+                  }
+                
+                }            
             >
                     {message}
             </Alert>

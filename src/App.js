@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import Layout from "./pages/Layout";
 import { Account } from "./pages/Account/Account";
@@ -20,7 +21,7 @@ function App() {
               <Route path="account/*" element={<Account />} />
               <Route path="admin/*" element={<Admin />} />
             </Route>
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login  />} />
             <Route path="register" element={<Registation />} />
           </Route>
         </Routes>

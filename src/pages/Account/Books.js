@@ -4,7 +4,9 @@ import Book from "./Book";
 import { BookList } from "./BookList";
 import { useSelector } from "react-redux";
 import { selectCurrentToken, selectCurrentUser } from "../../api/auth/AuthSlice";
-import { useGetAllbooksQuery } from "../../api/books/bookApiSlice"; 
+import { useGetAllbooksQuery } from "../../api/books/bookApiSlice";
+import { useGetUserbooksQuery } from "../../api/books/bookApiSlice";
+import { Unbook } from "./Unbook";
 
 import {
   Tabs,
@@ -14,21 +16,20 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 
-export const Books = () => {
-  const Subscribed = ["candle", "makertmover"];
-  const [UnSubscribedBooks, setUnSubscribedBooks] = React.useState([]);
-  const UnSubscribed = ["art", "science", "history", "Geography"];
+export const Books = ({userdata}) => {
 
+  const [UnSubscribedBooks, setUnSubscribedBooks] = React.useState([]);
+  
+  // const [subscribedBooks, setSubscribedBooks] = React.useState([]);
+  const user = JSON.parse(useSelector(selectCurrentUser));
+
+  const { data: subscribedBooks, isLoading } = useGetUserbooksQuery({id:user.id});
   const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
-  console.log(books);
+  console.log(subscribedBooks);
 
   return (
     <div>
       <Routes>
-        {Subscribed.map((each) => (
-          <Route key={each} path={`/${each}`} element={<Book data={each} />} />
-        ))}
-
         <Route
           path="/"
           element={
@@ -43,18 +44,17 @@ export const Books = () => {
               </TabsHeader>
               <TabsBody>
                 <TabPanel key={1} value={1}>
-                  <BookList data={Subscribed} />
+                  <BookList data={subscribedBooks} />
                 </TabPanel>
 
                 <TabPanel key={2} value={2}>
-                  <BookList data={books} />
+                  <Unbook data={books} />
                 </TabPanel>
               </TabsBody>
             </Tabs>
           }
         />
-
-        {books?.map((each) => (
+        {subscribedBooks?.map((each) => (
           <Route key={each.id} path={`/${each.title}`}
            element={<Book data={each.book} />} />
         ))}

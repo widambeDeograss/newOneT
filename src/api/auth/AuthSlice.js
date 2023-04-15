@@ -15,8 +15,8 @@ const authSlice = createSlice({
    reducers: {
       loginAuth: (state, action) => {
          const { profile_id, tokens } = action.payload
-         state.user = user
-         state.token = token
+         state.user = profile_id
+         state.token = tokens
       },
       logOut: (state, action) => {
          state.user = null
@@ -47,5 +47,6 @@ export default authSlice.reducer;
 export const authRegReducer = authRegSlice.reducer;
 
 export const selectCurrentUser = (state) => state.auth.user;
+console.log(selectCurrentUser);
 
 export const selectCurrentToken = (state) => state.auth.token;

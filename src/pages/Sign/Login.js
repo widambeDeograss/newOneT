@@ -15,7 +15,7 @@ import {
 import "./login.css";
 import { Input, Button } from "@material-tailwind/react";
 
-const Login = () => {
+const Login = ({setUserdata}) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const useRef = React.useRef();
   const errRef = React.useRef();
@@ -34,7 +34,6 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Submmmm");
     const body = {
       username: username,
       password: password,
@@ -43,16 +42,17 @@ const Login = () => {
     try {
       let severity = "info";
       const userData = await login(body).unwrap();
-      console.log(userData);
 
-    //   localStorage.setItem("user", JSON.stringify(userData));
+      localStorage.setItem("user", JSON.stringify(userData.profile_id));
+
       localStorage.setItem("token", userData.tokens.access);
-      dispatch(loginAuth({ ...userData }));
+  dispatch(loginAuth({ ...userData  }));
       setUsername("");
       setPassword("");
       if (userData.profile_id.type == "admin") {
         navigate("/admin");
       } else if (userData.profile_id.type == "normal") {
+        console.log("normalysdghweywe");
         navigate("/account");
       }
 
@@ -105,11 +105,7 @@ const Login = () => {
             </div>
 
             <p className="social-text">Or Sign in with social platforms</p>
-            <div className="flex w-max gap-4 extra">
-              <a href="/admin">
-                <Button color="blue">Admin</Button>
-              </a>
-            </div>
+
             <div className="social-media">
               <a href="#" className="social-icon">
                 <FontAwesomeIcon icon={faFacebookF} />

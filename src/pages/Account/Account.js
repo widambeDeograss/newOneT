@@ -6,16 +6,16 @@ import "./account.css";
 import { Books } from "./Books";
 import Footer from "./Footer";
 
-export const Account = () => {
+export const Account = ({userdata}) => {
+  console.log(userdata)
   return (
     <div className="account">
-      <Navbar>
+      <Navbar/>
         <Routes>
           <Route path="" element={<Dashboard />} />
-          <Route path="books/*" element={<Books />} />
+          <Route path="books/*" element={<Books userdata={userdata} />} />
         </Routes>
-        <Footer className="footer" />
-      </Navbar>
+        {/* <Footer className="footer" /> */}
     </div>
   );
 };
