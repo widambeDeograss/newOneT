@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import '../navbar.css'
 import { FiHome ,FiBook, FiDollarSign, FiLogOut,FiChevronRight,FiSearch,FiMoon,FiSun } from 'react-icons/fi';
+import { UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
 
 function Navbar(props) {
     const [sidebar, setSidebar] = useState(true);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(true);
 
     const handleToggleSidebar = () => setSidebar(!sidebar);
     const handleToggleDarkMode = () => setDarkMode(!darkMode);
@@ -37,8 +38,20 @@ function Navbar(props) {
                                     <span className="text nav-text">Dashboard</span>
                                 </a>
                             </li>
+                            <li className="nav-link">
+                                <a href="/admin/users">
+                                    <UserGroupIcon className="icon" />
+                                    <span className="text nav-text">Users</span>
+                                </a>
+                            </li>
+                            <li className="nav-link">
+                                <a href="/admin/assignBooks-to-user">
+                                    <FiDollarSign className="icon" />
+                                    <span className="text nav-text">Subscriptions</span>
+                                </a>
+                            </li>
 
-                            
+        
                             <li className="nav-link">
                                 <a href="/admin/Admin-books">
                                     <FiBook className="icon" />

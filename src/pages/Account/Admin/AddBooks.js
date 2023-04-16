@@ -17,9 +17,9 @@ const AddBooks = () => {
     <div>
       <Card
         className="W-72"
-        style={{ display: "flex!important", flexDirection: "row" }}
+        style={{ alignItems: "center", flexDirection: "row",backgroundColor:'transparent' }}
       >
-        <CardBody className="flex flex-col gap-4">
+        <CardBody className="flex flex-wrap gap-4" >
           <div className="w-72 extra-input">
             <Input label="Title" />
           </div>
@@ -55,12 +55,13 @@ const AddBooks = () => {
               type="file"
             />
           </div>
+          <br/>
 
           <Button className="extra-input">Button</Button>
         </CardBody>
 
         <CardFooter className="pt-0">
-          <p>
+          {/* <p>
             It is essential to understand that bandwidth is not the same as
             speed. Bandwidth refers to the maximum amount of data that can be
             transmitted over a network connection, while speed refers to the
@@ -77,7 +78,7 @@ const AddBooks = () => {
             where a byte is equal to eight bits. For example, a network
             connection with a bandwidth of 1 Gbps can transmit up to 125
             megabytes per second (MBps).
-          </p>
+          </p> */}
         </CardFooter>
       </Card>
     </div>

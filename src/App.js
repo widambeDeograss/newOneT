@@ -17,10 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Account />} />
-            <Route element={<RequireAuth />}>
+            {/* <Route element={<RequireAuth />}> */}
               <Route path="account/*" element={<Account />} />
               <Route path="admin/*" element={<Admin />} />
-            </Route>
+            {/* </Route> */}
             <Route path="login" element={<Login  />} />
             <Route path="register" element={<Registation />} />
           </Route>

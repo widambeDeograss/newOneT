@@ -6,29 +6,6 @@ import "./pdfV.css";
 import { baseUrl } from '../../../appState/baseUrl';
 
 
-// function AllPages(props) {
-//   const [numPages, setNumPages] = useState(null);
-
-//   function onDocumentLoadSuccess({ numPages }) {
-//     setNumPages(numPages);
-//   }
-
-//   const { pdf } = props;
-
-//   return (
-//     <Document
-//       file={pdf}
-//       options={{ workerSrc: "/pdf.worker.js" }}
-//       onLoadSuccess={onDocumentLoadSuccess}
-//     >
-//       {Array.from(new Array(numPages), (el, index) => (
-//         <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-//       ))}
-//     </Document>
-//   );
-// }
-
-
 // Create Document Component
 const PdfViewer = (props) => {
   const [numPages, setNumPages] = useState(null);
