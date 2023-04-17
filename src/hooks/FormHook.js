@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { selectCurrentToken } from "../api/auth/AuthSlice";
 import { setAlert, toggleAlert, toggleLoading } from "../api/store/appStateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -28,16 +29,21 @@ export const useFormManager =  (initialState) => {
 
 export const useFormPost = () => {
     const dispatch = useDispatch();
-    // const userId = useSelector(state => state.UserStateReducer.id);
+    const token = useSelector(selectCurrentToken);
+   
  
     const post = async ({url, response, data}) => {
 
         const requestHeader = {
-            timestamp: new Date().getMilliseconds(),
-            token: ""
+            // timestamp: new Date().getMilliseconds(),
+            headers: {
+                Authorization: "Token "  + token,
+              }
+            
         }
 
         const requestBody = {
+
             data: data,
             // userId: userId
         }
@@ -46,14 +52,12 @@ export const useFormPost = () => {
             body: requestBody
         }
 
-
         dispatch(toggleLoading());
         let message = "";
         let severity = "info";
-        console.log(request);
 
         try {
-            await axios.post(url, data)
+            await axios.post(url, data, requestHeader)
             .then((res) => {
                 if(res.status === 200){
                     response = res.data;

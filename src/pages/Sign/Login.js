@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginAuth } from "../../api/auth/AuthSlice";
 import { useFormPost } from "../../hooks/FormHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setAlert,  toggleAlert } from "../../api/store/appStateSlice";
+import { setAlert, toggleAlert } from "../../api/store/appStateSlice";
 import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
@@ -12,14 +12,14 @@ import {
   faGoogle,
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
-import "./login.css";
+// import "./login.css";
 import { Input, Button } from "@material-tailwind/react";
 import { UserUrls } from "../../utils/Config";
 
-const Login = ({setUserdata}) => {
-  const formPost = useFormPost()
+
+const Login = ({ setUserdata }) => {
+  const formPost = useFormPost();
   const dispatch = useDispatch();
-  const [isSignUpMode, setIsSignUpMode] = useState(false);
   const useRef = React.useRef();
   const errRef = React.useRef();
   const [errorMsg, setErrorMsg] = React.useState();
@@ -35,26 +35,35 @@ const Login = ({setUserdata}) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const body = {
-      username: username,
+      email: username,
       password: password,
     };
     try {
       let severity = "info";
-      const userData = await formPost.post({url:UserUrls.userLogin , data: body});
-      console.log(userData);
-      localStorage.setItem("user", JSON.stringify(userData.profile_id));
-      localStorage.setItem("token", userData.tokens.access);
-      dispatch(loginAuth({ ...userData  }));
+
+      const response = await formPost.post({
+        url: UserUrls.userLogin,
+        data: body,
+      });
+      console.log(response);
+
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      const userdata = {user:response.data.user, token:response.data.token}
+      localStorage.setItem("token", response.data.token);
+      dispatch(loginAuth({ ...userdata }));
       setUsername("");
       setPassword("");
 
-      if (userData.profile_id.type == "admin") {
+      if (response.data.user.role== 0) {
+        console.log('admin');
         navigate("/admin");
-      } else if (userData.profile_id.type == "normal") {
+      } else {
         navigate("/account");
       }
 
-      dispatch(setAlert({message: userData.profile_id.type, severity: severity}));
+      dispatch(
+        setAlert({ message: response.data.message, severity: severity })
+      );
       dispatch(toggleAlert());
 
     } catch (error) {
@@ -66,12 +75,11 @@ const Login = ({setUserdata}) => {
       } else {
         setErrorMsg("login failed try again later");
       }
-      // errRef.current.focus();
     }
   };
 
   return (
-    <div className={`container ${anime ? "sign-up-mode" : ""}`}>
+    <div className={`contaner ${anime ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={handleSubmit} className="sign-in-form">
@@ -79,7 +87,9 @@ const Login = ({setUserdata}) => {
 
             <div className="w-72 extra">
               <Input
-                label="Username"
+                label="email"
+                type="email"
+                required
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
@@ -90,6 +100,7 @@ const Login = ({setUserdata}) => {
               <Input
                 type="password"
                 label="Password"
+                required
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}

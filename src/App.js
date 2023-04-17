@@ -13,7 +13,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <CustomAlertBar/>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Account />} />
@@ -25,6 +24,7 @@ function App() {
             <Route path="register" element={<Registation />} />
           </Route>
         </Routes>
+      <CustomAlertBar/>
       </BrowserRouter>
     </div>
   );

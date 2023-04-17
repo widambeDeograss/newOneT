@@ -1,12 +1,13 @@
 export const UserUrls = {
-    userLogin:"http://192.168.145.135:8000/auth/login",
-    userRegister: "http://192.168.145.135:8000/auth/register",
+    userLogin:"http://128.199.15.73:7700/api/auth/login",
+    userRegister: "http://128.199.15.73:7700/api/auth/register-user",
     AllUserCostomers: "http://192.168.145.135:8000/allUsers",
 }
 
 export const  BooksUrls = {
     allBooks: "http://192.168.145.135:8000/allBooks",
     UserSubscribedBooks: "http://192.168.145.135:8000/userBooks/",
+    addBooks: "http://192.168.145.135:8000/insertBook/",
 }
 
 export const RoleUrls = {

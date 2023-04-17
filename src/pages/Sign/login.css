@@ -171,7 +171,7 @@ form.sign-in-form {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.container:before {
+.contaner:before {
   content: "";
   position: absolute;
   height: 2000px;

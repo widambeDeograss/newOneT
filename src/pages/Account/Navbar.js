@@ -176,7 +176,7 @@ function NavListMenu() {
           <Typography as="a" href="#" variant="small" className="font-normal">
             <MenuItem
               {...triggers}
-              className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full"
+              className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full text-white"
             >
               <Square3Stack3DIcon className="h-[18px] w-[18px]" /> Pages{" "}
               <ChevronDownIcon
@@ -205,7 +205,7 @@ function NavListMenu() {
           </ul>
         </MenuList>
       </Menu>
-      <MenuItem className="flex items-center gap-2 text-blue-gray-900 lg:hidden">
+      <MenuItem className="flex items-center gap-2 text-blue-gray-900 lg:hidden ">
         <Square3Stack3DIcon className="h-[18px] w-[18px]" /> Pages{" "}
       </MenuItem>
       <ul className="ml-6 flex w-full flex-col gap-1 lg:hidden">
@@ -248,7 +248,7 @@ function NavList() {
         >
           <a href={whereto}>
             {" "}
-            <MenuItem className="flex items-center gap-2 lg:rounded-full">
+            <MenuItem className="flex items-center gap-2 lg:rounded-full text-white" >
               {React.createElement(icon, { className: "h-[18px] w-[18px]" })}{" "}
               {label}
             </MenuItem>
@@ -271,14 +271,14 @@ export default function ComplexNavbar() {
   }, []);
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
-      <div className="relative mx-auto flex items-center text-blue-gray-900">
+    <Navbar className=" mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6" color="transparent" >
+      <div className="relative mx-auto flex items-center text-white">
         <Typography
           as="a"
           href="#"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
         >
-          Vast<span style={{ color: "red" }}>FX</span>
+          <strong> <h1>Vast<span style={{ color: "red" }}>FX</span></h1></strong>
         </Typography>
         <div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block">
           <NavList />
