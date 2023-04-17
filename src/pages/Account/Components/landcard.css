@@ -1,0 +1,20 @@
+.costume-card{
+    width: 15rem;
+    background-size: cover;
+    height: 20rem;
+    margin-top: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.costume-card>span{
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-end;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 10px;
+}

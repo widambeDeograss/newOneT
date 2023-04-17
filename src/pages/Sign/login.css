@@ -16,11 +16,11 @@ input {
 }
 
 .container {
-  position: relative;
+  /* position: relative;
   width: 100%;
   background-color: #E4E9F7;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .forms-container {
@@ -171,7 +171,7 @@ form.sign-in-form {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.contaner:before {
+.container:before {
   content: "";
   position: absolute;
   height: 2000px;
