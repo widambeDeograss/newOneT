@@ -18,15 +18,15 @@ const overviews = [
     value: "12 500"
   },
   {
-    name: "Orders",
+    name: "Subscriptions",
     value: "12 500"
   },
   {
-    name: "Products",
+    name: "Books",
     value: "12 500"
   },
   {
-    name: "Visits",
+    name: "Unsubscribed Books",
     value: "12 500"
   }
 ];
@@ -74,7 +74,7 @@ const targets = [
     value: 75
   },
   {
-    name: "Orders",
+    name: "subscriptions",
     value: 50
   }
 ];
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
   return (
     <div className="p-6">
   <div className="flex items-center justify-between">
-      <Typography variant="h1">Home</Typography>
+      <Typography variant="h1">Admin Home</Typography>
     </div>
     <div className="grid py-6 grid-cols-1 md:grid-cols-12 gap-4">
       {overviews.map((overview) => (

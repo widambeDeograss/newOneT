@@ -1,5 +1,7 @@
 import React from "react";
 import { BookList } from "../BookList";
+import { BooksUrls } from "../../../utils/Config";
+import { useDataFetch } from "../../../hooks/DataHook";
 import {
   Tabs,
   TabsHeader,
@@ -8,16 +10,24 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import AddBooks from "./AddBooks";
-import { useGetAllbooksQuery } from "../../../api/books/bookApiSlice"; 
 
 
 const AdminBooks = () => {
+  const [Books, setBooks] = React.useState([])
+  const fetcher = useDataFetch()
   // const books = ["art", "science", "history", "Geography"];
-  const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
-  console.log(books);
-  // if(loadUnSubBooks){
-  //   return <h1>Loading ...</h1>
-  // }
+ 
+  const loadData = async () => {
+    const response = await fetcher.fetch({url: BooksUrls.allBooks});
+    console.log(response);
+    if(response){
+      setBooks(response);
+    }
+}
+
+React.useEffect(() => {
+    loadData();
+}, []);
 
 
   return (
@@ -33,7 +43,7 @@ const AdminBooks = () => {
         </TabsHeader>
         <TabsBody>
           <TabPanel key={1} value={1}>
-            <BookList data={books} />
+            <BookList data={Books} />
           </TabPanel>
 
           <TabPanel key={2} value={2}>

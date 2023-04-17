@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Outlet } from "react-router-dom";
 import '../navbar.css'
 import { FiHome ,FiBook, FiDollarSign, FiLogOut,FiChevronRight,FiSearch,FiMoon,FiSun } from 'react-icons/fi';
 import { UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
@@ -84,8 +85,10 @@ function Navbar(props) {
                     </div>
                 </div>
             </nav>
-            <section className="home">
+            <section style={{marginLeft:"80px"}}>
                 <div className="text">{props.children}</div>
+            {/* <Outlet /> */}
+
             </section>
         </div>
     );

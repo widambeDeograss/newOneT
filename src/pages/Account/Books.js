@@ -4,10 +4,9 @@ import Book from "./Book";
 import { BookList } from "./BookList";
 import { useSelector } from "react-redux";
 import { selectCurrentToken, selectCurrentUser } from "../../api/auth/AuthSlice";
-import { useGetAllbooksQuery } from "../../api/books/bookApiSlice";
-import { useGetUserbooksQuery } from "../../api/books/bookApiSlice";
+import { BooksUrls } from "../../utils/Config";
+import { useDataFetch } from "../../hooks/DataHook";
 import { Unbook } from "./Unbook";
-
 import {
   Tabs,
   TabsHeader,
@@ -16,16 +15,32 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 
-export const Books = ({userdata}) => {
 
+export const Books = ({userdata}) => {
+  const fetcher = useDataFetch()
+  // const books = ['data']
   const [UnSubscribedBooks, setUnSubscribedBooks] = React.useState([]);
   
-  // const [subscribedBooks, setSubscribedBooks] = React.useState([]);
+  const [subscribedBooks, setSubscribedBooks] = React.useState([]);
   const user = JSON.parse(useSelector(selectCurrentUser));
 
-  const { data: subscribedBooks, isLoading } = useGetUserbooksQuery({id:user.id});
-  const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
-  console.log(subscribedBooks);
+  const loadData = async () => {
+      const response = await fetcher.fetch({url: BooksUrls.allBooks});
+      const subresponse = await fetcher.fetch({url: BooksUrls.UserSubscribedBooks + '1' });
+      // console.log(response);
+      if(response){
+        setUnSubscribedBooks(response);
+        setSubscribedBooks(subresponse);
+      }
+  }
+
+  React.useEffect(() => {
+      loadData();
+  }, []);
+
+  // const { data: subscribedBooks, isLoading } = useGetUserbooksQuery({id:user.id});
+  // const { data: books, isLoading:loadUnSubBooks } = useGetAllbooksQuery();
+  // console.log(subscribedBooks);
 
   return (
     <div>
@@ -48,7 +63,7 @@ export const Books = ({userdata}) => {
                 </TabPanel>
 
                 <TabPanel key={2} value={2}>
-                  <Unbook data={books} />
+                  <Unbook data={UnSubscribedBooks} />
                 </TabPanel>
               </TabsBody>
             </Tabs>

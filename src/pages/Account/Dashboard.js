@@ -1,13 +1,14 @@
 import React from "react";
 import { Card, CardBody } from "@material-tailwind/react";
 
-import profileImage from "../../Assets/prof.jpg";
 
 function Dashboard() {
   let currentDate = new Date();
 
   return (
     <div className="px-4 py-8">
+    
+    
       <h1 className="text-4xl font-bold mb-4">Welcome back!</h1>
       <Card>
         <CardBody>

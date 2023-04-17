@@ -1,7 +1,8 @@
 import React from 'react'
 import BookCard from './Components/BookCard'
 import Book from './Book'
-import {baseUrl} from '../../appState/baseUrl'
+import {baseUrl} from '../../utils/baseUrl'
+import { Typography } from '@material-tailwind/react'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
@@ -15,8 +16,18 @@ export const BookList = ({ data }) => {
     setNumPages(numPages);
     setPageNumber(1);
   }
+  if (!data || !data.length) {
+      return(
+          <div>
+          <div className="text-center px-4 py-8">
+              <Typography className="mt-2" muted small>
+                  There is no Books currently!...
+              </Typography>
+          </div>
+        </div>
+      );
+    }
   
-
     return (
         <div>
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">

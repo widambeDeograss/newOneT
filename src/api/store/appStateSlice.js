@@ -24,7 +24,7 @@ export const AppStateSlice = createSlice({
         toggleDrawerState: (state) => {
             state.drawerState = !state.drawerState;
         },
-        displayAlert: (state, {payload}) => {
+        setAlert: (state, {payload}) => {
             state.message = payload.message;
             let severity = '';
             switch(payload.severity){
@@ -49,11 +49,11 @@ export const AppStateSlice = createSlice({
        toggleAlert: (state) => {
             state.alertState = !state.alertState
        },
-       toggleSpinner: (state) => {
+       toggleLoading: (state) => {
             state.isPageLoading = !state.isPageLoading
        }
     }
 });
 
-export const { setAuthentication, toggleThemeMode, setModalTitle, toggleModalState, toggleDrawerState, displayAlert, toggleAlert, setModal, toggleSpinner } = AppStateSlice.actions;
+export const { setAuthentication, toggleThemeMode, setModalTitle, toggleModalState, toggleDrawerState, setAlert, toggleAlert, setModal, toggleLoading } = AppStateSlice.actions;
 export default AppStateSlice.reducer;

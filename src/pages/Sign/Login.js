@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginAuth } from "../../api/auth/AuthSlice";
-import { useLoginMutation } from "../../api/auth/AuthApiSlice";
+import { useFormPost } from "../../hooks/FormHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { displayAlert,  toggleAlert } from "../../api/store/appStateSlice";
+import { setAlert,  toggleAlert } from "../../api/store/appStateSlice";
 import { faUser, faLock, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
@@ -14,8 +14,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "./login.css";
 import { Input, Button } from "@material-tailwind/react";
+import { UserUrls } from "../../utils/Config";
 
 const Login = ({setUserdata}) => {
+  const formPost = useFormPost()
+  const dispatch = useDispatch();
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const useRef = React.useRef();
   const errRef = React.useRef();
@@ -25,12 +28,9 @@ const Login = ({setUserdata}) => {
   const navigate = useNavigate();
 
   const [anime, setAnime] = useState(true);
-
   setTimeout(() => {
     setAnime(false);
   }, 50);
-  const [login, { isLoading }] = useLoginMutation();
-  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,25 +38,23 @@ const Login = ({setUserdata}) => {
       username: username,
       password: password,
     };
-    console.log(body);
     try {
       let severity = "info";
-      const userData = await login(body).unwrap();
-
+      const userData = await formPost.post({url:UserUrls.userLogin , data: body});
+      console.log(userData);
       localStorage.setItem("user", JSON.stringify(userData.profile_id));
-
       localStorage.setItem("token", userData.tokens.access);
-  dispatch(loginAuth({ ...userData  }));
+      dispatch(loginAuth({ ...userData  }));
       setUsername("");
       setPassword("");
+
       if (userData.profile_id.type == "admin") {
         navigate("/admin");
       } else if (userData.profile_id.type == "normal") {
-        console.log("normalysdghweywe");
         navigate("/account");
       }
 
-      dispatch(displayAlert({message: userData.profile_id.type, severity: severity}));
+      dispatch(setAlert({message: userData.profile_id.type, severity: severity}));
       dispatch(toggleAlert());
 
     } catch (error) {
@@ -68,7 +66,7 @@ const Login = ({setUserdata}) => {
       } else {
         setErrorMsg("login failed try again later");
       }
-      errRef.current.focus();
+      // errRef.current.focus();
     }
   };
 

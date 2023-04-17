@@ -15,14 +15,12 @@ export const CustomAlertBar = () => {
     const handleAlertState = () => {
         dispatch(toggleAlert());
     }
-    console.log(message);
-    console.log(state);
     return(
         <React.Fragment>
             <Alert
-                style={{position:'fixed!important',left:'0px', top:'0px',zIndex:'1000'}}
+                style={{position:'fixed!important',left:'50%', top:'0px',zIndex:'1', width:'60%', height:'5vh'}}
                 show={state}
-                color={severity === 'success'?'green':severity === 'error'?'red':'red'}
+                color={severity === 'success'?'green':severity === 'warning'?'gray':'red'}
                 onClose={handleAlertState}
                 dismissible={{
                     onClose: () => handleAlertState(),

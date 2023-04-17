@@ -16,12 +16,10 @@ const AddBooks = () => {
   return (
     <div>
       <Card
-        className="W-72"
-        style={{ alignItems: "center", flexDirection: "row",backgroundColor:'transparent' }}
       >
         <CardBody className="flex flex-wrap gap-4" >
           <div className="w-72 extra-input">
-            <Input label="Title" />
+            <Input label=" Book Title" />
           </div>
 
           <div class="mb-3 w-96 extra-input">
@@ -41,6 +39,9 @@ const AddBooks = () => {
           <div className="w-72 extra-input">
             <Textarea label="Book Descption" />
           </div>
+          <div className="w-72 extra-input">
+            <Input label=" Book Price" />
+          </div>
 
           <div class="mb-3 w-96 extra-input">
             <label
@@ -57,28 +58,11 @@ const AddBooks = () => {
           </div>
           <br/>
 
-          <Button className="extra-input">Button</Button>
+          <Button className="extra-input">Add Book</Button>
         </CardBody>
 
         <CardFooter className="pt-0">
-          {/* <p>
-            It is essential to understand that bandwidth is not the same as
-            speed. Bandwidth refers to the maximum amount of data that can be
-            transmitted over a network connection, while speed refers to the
-            actual rate at which data is transmitted. In other words, bandwidth
-            is like the width of a pipe, and speed is like the amount of water
-            flowing through the pipe. A network connection with a high bandwidth
-            does not necessarily mean that data will be transmitted quickly.
-            Other factors such as latency, packet loss, and network congestion
-            can affect the actual speed of data transmission. Bandwidth can be
-            measured in several ways, depending on the context. The most common
-            measurement units are bits per second (bps), kilobits per second
-            (Kbps), megabits per second (Mbps), and gigabits per second (Gbps).
-            In some cases, bandwidth is also measured in bytes per second (Bps),
-            where a byte is equal to eight bits. For example, a network
-            connection with a bandwidth of 1 Gbps can transmit up to 125
-            megabytes per second (MBps).
-          </p> */}
+       
         </CardFooter>
       </Card>
     </div>
