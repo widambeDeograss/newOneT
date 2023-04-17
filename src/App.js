@@ -8,6 +8,7 @@ import Registation from "./pages/Sign/Registration";
 import Admin from "./pages/Account/Admin/Admin";
 import RequireAuth from "./api/auth/RequireAuth";
 import { CustomAlertBar } from "./pages/Account/Components/Alerts";
+import Landingpage from './pages/Land/Landingpage'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <CustomAlertBar/>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Account />} />
+            <Route index element={<Landingpage />} />
             <Route element={<RequireAuth />}>
               <Route path="account/*" element={<Account />} />
               <Route path="admin/*" element={<Admin />} />

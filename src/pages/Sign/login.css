@@ -16,11 +16,11 @@ input {
 }
 
 .container {
-  position: relative;
+  /* position: relative;
   width: 100%;
   background-color: #E4E9F7;
   min-height: 100vh;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .forms-container {
@@ -172,6 +172,7 @@ form.sign-in-form {
 }
 
 .container:before {
+  right: 0;
   content: "";
   position: absolute;
   height: 2000px;
