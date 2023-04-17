@@ -150,6 +150,7 @@ const Landingpage = () => {
       </section>
 
       <div className="books">
+        <span style={{fontSize:'36pt',fontWeight:'bolder'}}>All Available book</span>
         <div className="all-books">
           {arry.map(() => {
             return <LandCard />;
