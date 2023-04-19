@@ -12,14 +12,17 @@ import { useDataFetch } from "../../hooks/DataHook";
 
 export function Profile() {
   const [User, setUser] = useState();
+  const fetcher = useDataFetch()
+  const [numberBoocs, setnumberBoocs] = useState();
+
   const loadData = async () => {
     const subresponse = await fetcher.fetch({url: BooksUrls.AllSubscriptions});
     console.log(subresponse); 
-    if(response){
-      setUser(response.data);
+    if(subresponse){
+      setUser(subresponse[0]);
     }
 }
-
+console.log(User);
 React.useEffect(() => {
     loadData();
 }, []);
