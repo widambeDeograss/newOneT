@@ -20,10 +20,11 @@ export function Profile() {
     console.log(subresponse); 
     if(subresponse){
       setUser(subresponse[0]);
-      set
+      setnumberBoocs(subresponse.length)
     }
 }
 console.log(User);
+
 React.useEffect(() => {
     loadData();
 }, []);
