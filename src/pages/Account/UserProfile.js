@@ -1,3 +1,4 @@
+import React,{useState} from "react";
 import { Avatar, Typography, Button } from "@material-tailwind/react";
 import {
   MapPinIcon,
@@ -5,9 +6,24 @@ import {
   BuildingLibraryIcon,
 } from "@heroicons/react/24/solid";
 import Footer from "./Footer";
+import { BooksUrls } from "../../utils/Config";
+import { useDataFetch } from "../../hooks/DataHook";
 
 
 export function Profile() {
+  const [User, setUser] = useState();
+  const loadData = async () => {
+    const subresponse = await fetcher.fetch({url: BooksUrls.AllSubscriptions});
+    console.log(subresponse); 
+    if(response){
+      setUser(response.data);
+    }
+}
+
+React.useEffect(() => {
+    loadData();
+}, []);
+
   return (
     <>
       <section className="relative block h-[50vh]">

@@ -22,7 +22,6 @@ export const Books = ({userdata}) => {
   const [UnSubscribedBooks, setUnSubscribedBooks] = React.useState([]);
   
   const [subscribedBooks, setSubscribedBooks] = React.useState([]);
-  const user = JSON.parse(useSelector(selectCurrentUser));
 
   const loadData = async () => {
       const response = await fetcher.fetch({url: BooksUrls.allBooks});
