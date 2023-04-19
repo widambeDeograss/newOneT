@@ -175,6 +175,5 @@ Footer.propTypes = {
   copyright: PropTypes.node,
 };
 
-Footer.displayName = "/src/widgets/layout/footer.jsx";
 
 export default Footer;

@@ -33,17 +33,20 @@ const Login = ({ setUserdata }) => {
   }, 50);
 
   const handleSubmit = async (event) => {
+    localStorage.clear()
     event.preventDefault();
     const body = {
       email: username,
       password: password,
     };
+    console.log(body);
     try {
       let severity = "info";
 
       const response = await formPost.post({
         url: UserUrls.userLogin,
         data: body,
+        login:true
       });
       console.log(response);
 
@@ -79,7 +82,7 @@ const Login = ({ setUserdata }) => {
   };
 
   return (
-    <div className={`contaner ${anime ? "sign-up-mode" : ""}`}>
+    <div className={`container ${anime ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={handleSubmit} className="sign-in-form">

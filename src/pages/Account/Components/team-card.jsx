@@ -35,6 +35,5 @@ TeamCard.propTypes = {
   socials: PropTypes.node,
 };
 
-TeamCard.displayName = "/src/widgets/layout/team-card.jsx";
 
 export default TeamCard;

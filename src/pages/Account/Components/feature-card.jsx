@@ -60,6 +60,5 @@ FeatureCard.propTypes = {
   description: PropTypes.node.isRequired,
 };
 
-FeatureCard.displayName = "/src/widgets/layout/feature-card.jsx";
 
 export default FeatureCard;

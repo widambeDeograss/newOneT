@@ -21,7 +21,7 @@ const AdminBooks = () => {
     const response = await fetcher.fetch({url: BooksUrls.allBooks});
     console.log(response);
     if(response){
-      setBooks(response);
+      setBooks(response.data);
     }
 }
 

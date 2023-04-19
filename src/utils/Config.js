@@ -1,13 +1,17 @@
 export const UserUrls = {
     userLogin:"http://128.199.15.73:7700/api/auth/login",
     userRegister: "http://128.199.15.73:7700/api/auth/register-user",
-    AllUserCostomers: "http://192.168.145.135:8000/allUsers",
+    AllUserCostomers: "http://128.199.15.73:7700/api/v1/list-users",
+    userById: "http://128.199.15.73:7700/api/v1/user/",
 }
 
 export const  BooksUrls = {
-    allBooks: "http://192.168.145.135:8000/allBooks",
+    allBooks: "http://128.199.15.73:7700/api/v1/books",
     UserSubscribedBooks: "http://192.168.145.135:8000/userBooks/",
-    addBooks: "http://192.168.145.135:8000/insertBook/",
+    addBooks: "http://128.199.15.73:7700/api/v1/books",
+    BookSubscription: "http://128.199.15.73:7700/api/v1/book-subscriptions",
+    AllSubscriptions: "http://128.199.15.73:7700/api/v1/list-book-subscriptions",
+    SubscriptionById: "http://128.199.15.73:7700/api/v1/book-subscription/",
 }
 
 export const RoleUrls = {

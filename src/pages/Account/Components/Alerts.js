@@ -18,7 +18,8 @@ export const CustomAlertBar = () => {
     return(
         <React.Fragment>
             <Alert
-                style={{position:'fixed!important',left:'50%', top:'0px',zIndex:'1', width:'60%', height:'5vh'}}
+               
+                style={{position:'-webkit-sticky', margin:"auto",zIndex:'10', width:'300px', height:'30vh'}}
                 show={state}
                 color={severity === 'success'?'green':severity === 'warning'?'gray':'red'}
                 onClose={handleAlertState}
@@ -28,6 +29,7 @@ export const CustomAlertBar = () => {
                       <Button variant="text" color="white" size="sm">
                         Close
                       </Button>
+                    
                     ),
                   }
                 

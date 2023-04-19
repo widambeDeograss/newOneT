@@ -5,7 +5,7 @@ import Navbar from "./pages/Account/Navbar";
 import App from "./App";
 import { store } from "./api/store/store";
 import { Provider } from "react-redux";
-import Landingpage from "./pages/Land/Landingpage";
+// import Landingpage from "./pages/Land/Landingpage";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

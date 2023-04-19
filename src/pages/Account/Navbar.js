@@ -19,7 +19,7 @@ import {
   CodeBracketSquareIcon,
   Square3Stack3DIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
+  ArrowRightOnRectangleIcon,
   InboxArrowDownIcon,
   LifebuoyIcon,
   PowerIcon,
@@ -28,39 +28,42 @@ import {
   BookOpenIcon,
   HomeIcon,
 } from "@heroicons/react/24/outline";
-
-// profile menu component
-const profileMenuItems = [
-  {
-    label: "My Profile",
-    icon: UserCircleIcon,
-    whereto: "",
-  },
-  {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-    whereto: "",
-  },
-  {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-    whereto: "",
-  },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-    whereto: "",
-  },
-  {
-    label: "Sign Out",
-    icon: PowerIcon,
-    whereto: "/login",
-  },
-];
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../../api/auth/AuthSlice";
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const token = useSelector(selectCurrentToken);
+
+  // profile menu component
+  const profileMenuItems = [
+    {
+      label: "My Profile",
+      icon: UserCircleIcon,
+      whereto: "/account/profile",
+    },
+    // {
+    //   label: "Edit Profile",
+    //   icon: Cog6ToothIcon,
+    //   whereto: "",
+    // },
+    // {
+    //   label: "Inbox",
+    //   icon: InboxArrowDownIcon,
+    //   whereto: "",
+    // },
+    {
+      label: "Help",
+      icon: LifebuoyIcon,
+      whereto: "",
+    },
+    {
+      label:"Sign Out",
+      icon: token ? PowerIcon : CubeTransparentIcon,
+      whereto: token ? "/login" : "/register",
+    },
+  ];
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -173,13 +176,15 @@ function NavListMenu() {
     <React.Fragment>
       <Menu open={isMenuOpen} handler={setIsMenuOpen}>
         <MenuHandler>
-          <Typography as="a" href="#" variant="small" className="font-normal">
+          <Typography as="a" href="#" variant="small" className="font-normal" >
             <MenuItem
               {...triggers}
               className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full text-white"
+              
             >
               <Square3Stack3DIcon className="h-[18px] w-[18px]" /> Pages{" "}
               <ChevronDownIcon
+              
                 strokeWidth={2}
                 className={`h-3 w-3 transition-transform ${
                   isMenuOpen ? "rotate-180" : ""
@@ -215,25 +220,38 @@ function NavListMenu() {
   );
 }
 
-// nav list component
-const navListItems = [
-  {
-    label: "Home",
-    icon: HomeIcon,
-    whereto: "/account/",
-  },
-  {
-    label: "Books",
-    icon: BookOpenIcon,
-    whereto: "/account/books",
-  },
-  // {
-  //   label: "Docs",
-  //   icon: CodeBracketSquareIcon,
-  // },
-];
+function NavList(props) {
+  const token = useSelector(selectCurrentToken);
 
-function NavList() {
+  // nav list component
+  const navListItems = token
+    ? [
+      {
+        label: "Home",
+        icon: HomeIcon,
+        whereto: token ? "/account" : "/",
+      },
+
+      { label: "Books", icon: BookOpenIcon, whereto: "/account/books" },
+      {
+        label: "Docs",
+        icon: CodeBracketSquareIcon,
+      },
+    ]
+    : [
+        {
+          label: "Home",
+          icon: HomeIcon,
+          whereto: token ? "/account" : "/",
+        },
+
+        // { label: "Books", icon: BookOpenIcon, whereto: "/account/books" },
+        {
+          label: "Docs",
+          icon: CodeBracketSquareIcon,
+        },
+      ];
+
   return (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <NavListMenu />
@@ -243,12 +261,12 @@ function NavList() {
           as="a"
           href="#"
           variant="small"
-          color="blue-gray"
+          color={props.color}
           className="font-normal"
         >
           <a href={whereto}>
             {" "}
-            <MenuItem className="flex items-center gap-2 lg:rounded-full text-white" >
+            <MenuItem className="flex items-center gap-2 lg:rounded-full " color={props.color}>
               {React.createElement(icon, { className: "h-[18px] w-[18px]" })}{" "}
               {label}
             </MenuItem>
@@ -262,6 +280,7 @@ function NavList() {
 export default function ComplexNavbar() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
+  const token = useSelector(selectCurrentToken);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -271,17 +290,26 @@ export default function ComplexNavbar() {
   }, []);
 
   return (
-    <Navbar className=" mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6" color="transparent" >
-      <div className="relative mx-auto flex items-center text-white">
+    <Navbar
+      className=" mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6"
+      color={isNavOpen?'gray':"transparent"}
+    >
+      <div className="relative mx-auto flex items-center ">
         <Typography
           as="a"
           href="#"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
+          color={isNavOpen?'black':""}
         >
-          <strong> <h1>Vast<span style={{ color: "red" }}>FX</span></h1></strong>
+          <strong>
+            {" "}
+            <h1>
+              Vast<span style={{ color: "red" }}>FX</span>
+            </h1>
+          </strong>
         </Typography>
         <div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block">
-          <NavList />
+          <NavList color={isNavOpen?'black':""}/>
         </div>
         <IconButton
           size="sm"
@@ -292,9 +320,22 @@ export default function ComplexNavbar() {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
-        <ProfileMenu />
+        {token? <ProfileMenu /> :   <a
+              href='/login'
+              className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+            >
+              {
+                React.createElement(ArrowRightOnRectangleIcon, {
+                  className: "w-[18px] h-[18px] opacity-75 mr-1 ",
+                })}
+                sign in
+            </a>}
+        {/* <Button variant="text" size="sm" className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto">
+              sign in <ArrowRightOnRectangleIcon/>
+            </Button> */}
+         
       </div>
-      <MobileNav open={isNavOpen} className="overflow-scroll">
+      <MobileNav open={isNavOpen} className="overflow-scroll" >
         <NavList />
       </MobileNav>
     </Navbar>

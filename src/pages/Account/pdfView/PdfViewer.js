@@ -9,8 +9,6 @@ import { baseUrl } from "../../../utils/baseUrl";
 const PdfViewer = (props) => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const pdfUrl = baseUrl + props.pdfUrl;
-  console.log(pdfUrl);
 
   useEffect(() => {
     pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -32,30 +30,30 @@ const PdfViewer = (props) => {
 
   return (
     <div>
-      <object
-        data={pdfUrl + "?page=hsn#toolbar=0"}
+      {/* <object
+        data={props.pdfUrl}
         width="100%"
         height={"700vh"}
       >
         <iframe
-        sandbox="disallow-download"
+        // sandbox="disallow-download"
           id="fraDisabled"
-          src={pdfUrl + "?page=hsn#toolbar=0"}
+          src={props.pdfUrl}
           width="100%"
           height={"700vh"}
         >
           <p>This browser does not support PDF!</p>
         </iframe>
-      </object>
+      </object> */}
+      <div className='unselectable' style={{ width:"100%"}}>
+ <SinglePagePDFViewer pdf={props.pdfUrl} />
+ <hr />
+ </div>  
+
     </div>
   );
 };
 
 export default PdfViewer;
 
-{
-  /* <div className='unselectable' style={{ width:"100%"}}>
- <SinglePagePDFViewer pdf={pdfUrl} />
- <hr />
- </div>  */
-}
+ 

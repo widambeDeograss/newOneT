@@ -11,7 +11,7 @@ import {
       <Card className="w-96">
         <CardHeader color="blue" className="relative h-56">
           <img
-            src="/img/blog.jpg"
+            src=""
             alt="img-blur-shadow"
             className="h-full w-full"
           />

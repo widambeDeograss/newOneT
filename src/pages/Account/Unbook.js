@@ -14,6 +14,7 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Typography,
 } from "@material-tailwind/react";
 // import "./unbook.css";
 
@@ -23,6 +24,17 @@ export const Unbook = ({ data }) => {
     const [open, setOpen] = useState(false);
   
     const handleOpen = () => setOpen(!open);
+    if (!data || !data.length) {
+      return(
+          <div>
+          <div className="text-center px-4 py-8">
+              <Typography className="mt-2" muted small>
+                  There is no Books currently!...
+              </Typography>
+          </div>
+        </div>
+      );
+    }
   
     return (
       <div>

@@ -15,6 +15,7 @@ export default function AddUser() {
   const formPost = useFormPost()
   const dispatch = useDispatch()
   const [username, setUsername] = useState();
+  const [name, setname] = useState();
   const [email, setEmail] = useState();
   const [tel, setTel] = useState();
   const [password, setPassword] = useState();
@@ -23,10 +24,12 @@ export default function AddUser() {
     event.preventDefault();
   
     const body = {
-      name:username,
+      username:username,
+      name:name,
+      role:1,
       email:email,
       phone:tel,
-      password:password,
+      password:password
 
     }
     console.log(body);
@@ -34,12 +37,14 @@ export default function AddUser() {
       let severity = "info";
       const response = await formPost.post({url:UserUrls.userRegister , data: body});
       console.log(response);
-
-      dispatch(setAlert({message:response , severity: severity}));
+      if (response.header.responseCode === 0) {
+        dispatch(setAlert({message:"user added success" , severity: severity}));
       dispatch(toggleAlert());
+      }
     } catch (error) {
       console.log(error);
     }
+    event.target.reset();
   }
 
   return (
@@ -53,8 +58,11 @@ export default function AddUser() {
 
       <form className="mt-3 mb-2 w-100 max-w-screen-lg sm:w-96" onSubmit={handleSubmit}>
         <div className="mb-4 flex flex-col gap-6">
-          <Input size="lg" label="Name" name="" type="text" required onChange={(e)=>{
+          <Input size="lg" label="user Name" name="" type="text" required onChange={(e)=>{
                                 setUsername(e.target.value)
+                            }}/>
+            <Input size="lg" label="Full Name" name="fullName" type="text" required onChange={(e)=>{
+                                setname(e.target.value)
                             }}/>
           <Input size="lg" label="Email" type="email" required onChange={(e)=>{
                                 setEmail(e.target.value)

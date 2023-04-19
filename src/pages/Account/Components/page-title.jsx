@@ -19,6 +19,5 @@ PageTitle.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-PageTitle.displayName = "/src/widgets/layout/page-title.jsx";
 
 export default PageTitle;

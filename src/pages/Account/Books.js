@@ -26,10 +26,11 @@ export const Books = ({userdata}) => {
 
   const loadData = async () => {
       const response = await fetcher.fetch({url: BooksUrls.allBooks});
-      const subresponse = await fetcher.fetch({url: BooksUrls.UserSubscribedBooks + '1' });
-      // console.log(response);
+      const subresponse = await fetcher.fetch({url: BooksUrls.AllSubscriptions});
+      console.log(response);
+      console.log(subresponse); 
       if(response){
-        setUnSubscribedBooks(response);
+        setUnSubscribedBooks(response.data);
         setSubscribedBooks(subresponse);
       }
   }
@@ -43,7 +44,7 @@ export const Books = ({userdata}) => {
   // console.log(subscribedBooks);
 
   return (
-    <div  style={{marginTop:"200px"}}>
+    <div style={{position:"relative", top:"80px",zIndex:3}} >
 
       <Routes>
         <Route
@@ -71,8 +72,8 @@ export const Books = ({userdata}) => {
           }
         />
         {subscribedBooks?.map((each) => (
-          <Route key={each.id} path={`/${each.title}`}
-           element={<Book data={each.book} />} />
+          <Route key={each.id} path={`/${each.book.title}`}
+           element={<Book data={each.book.book} />} />
         ))}
       </Routes>
     </div>
