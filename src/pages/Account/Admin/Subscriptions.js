@@ -4,21 +4,27 @@ import { useDataFetch } from "../../../hooks/DataHook";
 import { BooksUrls } from "../../../utils/Config";
 import { useFormPost } from "../../../hooks/FormHook";
 import { UserUrls } from "../../../utils/Config";
+import loading from "../../../Assets/output-onlinegiftools.gif";
+
 const renderDateTime = (dateString) => {
-    const dateTime = new Date(dateString)
-    return dateTime.toLocaleDateString()
-}
+  const dateTime = new Date(dateString);
+  return dateTime.toLocaleDateString();
+};
 
 function Subscriptions() {
   const [subscriptions, setsubscriptions] = React.useState([]);
   const fetcher = useDataFetch();
-  const formPost = useFormPost()
+  const formPost = useFormPost();
+  const [isLoading, setisLoading] = React.useState(false);
+
   // const books = ["art", "science", "history", "Geography"];
 
   const loadData = async () => {
+    setisLoading(true)
     const response = await fetcher.fetch({ url: BooksUrls.AllSubscriptions });
     if (response) {
       setsubscriptions(response);
+      setisLoading(false)
     }
   };
 
@@ -27,19 +33,36 @@ function Subscriptions() {
   }, []);
   console.log(subscriptions);
 
+  if (isLoading) {
+    return (
+      <div>
+        <div className="text-center px-4 py-8 " style={{ minHeight: "300px" }}>
+          <img
+            src={loading}
+            class="mx-auto w-10 "
+            style={{ backgroundColor: "transparent", alignItems: "center" }}
+          />
+          <Typography className="mt-2" muted small>
+            loading your books..
+          </Typography>
+        </div>
+      </div>
+    );
+  }
+
   const handle_delete = async (id) => {
     try {
-     alert('comfirm delete');
-     const response = await formPost.deleteRequest({ url: BooksUrls.SubscriptionById + id });
-     console.log(response);
-     alert('user deleted');
-     loadData();
+      alert("comfirm delete");
+      const response = await formPost.deleteRequest({
+        url: BooksUrls.SubscriptionById + id,
+      });
+      console.log(response);
+      alert("user deleted");
+      loadData();
     } catch (error) {
-       console.log(error);
- 
+      console.log(error);
     }
- 
-   };
+  };
 
   if (!subscriptions || !subscriptions.length) {
     return (
@@ -61,7 +84,6 @@ function Subscriptions() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -118,15 +140,19 @@ function Subscriptions() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
-                      {subs.user.name}
+                        {subs.user.name}
                       </div>
                       <div className="text-sm text-gray-500">{subs.phone}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={subs.is_active ? "px-2 inline-flex text-xs leading-5font-semibold rounded-full bg-green-100 text-green-800" : "px-2 inline-flex text-xs leading-5font-semibold rounded-full bg-red-100 text-green-800"}
+                        className={
+                          subs.is_active
+                            ? "px-2 inline-flex text-xs leading-5font-semibold rounded-full bg-green-100 text-green-800"
+                            : "px-2 inline-flex text-xs leading-5font-semibold rounded-full bg-red-100 text-green-800"
+                        }
                       >
-                         {subs.is_active ? "Active" : "Expired"}
+                        {subs.is_active ? "Active" : "Expired"}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -141,10 +167,11 @@ function Subscriptions() {
                       </a>
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                      <a className="text-red-500 hover:text-red-700" 
-                      onClick={() => {
-                        handle_delete(subs.id)
-                      }}
+                      <a
+                        className="text-red-500 hover:text-red-700"
+                        onClick={() => {
+                          handle_delete(subs.id);
+                        }}
                       >
                         Delete
                       </a>

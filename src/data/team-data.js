@@ -19,7 +19,7 @@ export const teamData = [
     ],
   },
   {
-    img: "/img/team-2.jpg",
+    img:"https://images.unsplash.com/photo-1634704784915-aacf363b021f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     name: "Romina Hadid",
     position: "Marketing Specialist",
     socials: [

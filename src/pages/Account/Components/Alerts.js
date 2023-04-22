@@ -18,8 +18,8 @@ export const CustomAlertBar = () => {
     return(
         <React.Fragment>
             <Alert
-               
-                style={{position:'-webkit-sticky', margin:"auto",zIndex:'10', width:'300px', height:'30vh'}}
+                className="  max-w-screen-md"
+                style={{position:'relative', margin:"auto",zIndex:'10', width:'300px'}}
                 show={state}
                 color={severity === 'success'?'green':severity === 'warning'?'gray':'red'}
                 onClose={handleAlertState}
@@ -27,7 +27,7 @@ export const CustomAlertBar = () => {
                     onClose: () => handleAlertState(),
                     action: (
                       <Button variant="text" color="white" size="sm">
-                        Close
+                        x
                       </Button>
                     
                     ),

@@ -30,11 +30,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../../api/auth/AuthSlice";
+import './navbar.css'
+import logo from '../../Assets/Vastfx.PNG'
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const closeMenu = () => setIsMenuOpen(false);
   const token = useSelector(selectCurrentToken);
+  const navigate = useNavigate()
 
   // profile menu component
   const profileMenuItems = [
@@ -53,16 +56,16 @@ function ProfileMenu() {
     //   icon: InboxArrowDownIcon,
     //   whereto: "",
     // },
-    {
-      label: "Help",
-      icon: LifebuoyIcon,
-      whereto: "",
-    },
-    {
-      label:"Sign Out",
-      icon: token ? PowerIcon : CubeTransparentIcon,
-      whereto: token ? "/login" : "/register",
-    },
+    // {
+    //   label: "Help",
+    //   icon: LifebuoyIcon,
+    //   whereto: "",
+    // },
+    // {
+    //   label:"Sign Out",
+    //   icon: token ? PowerIcon : CubeTransparentIcon,
+    //   whereto: token ? "/login" : "/register",
+    // },
   ];
 
   return (
@@ -78,7 +81,7 @@ function ProfileMenu() {
             size="sm"
             alt="candice wu"
             className="border border-blue-500 p-0.5"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA29za2oYfB6YlZLiz_E8tShFpXXE1vliCbkmPfxufNh2O4CvZk1GSnb9zChJ7qVc2LGU&usqp=CAU"
           />
           <ChevronDownIcon
             strokeWidth={2.5}
@@ -105,21 +108,17 @@ function ProfileMenu() {
                 onClick={() => {
                   closeMenu();
                 }}
-                className={`flex items-center gap-2 rounded ${
-                  isLastItem
-                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                    : ""
-                }`}
+                className="flex items-center gap-2 rounded "
               >
                 {React.createElement(icon, {
-                  className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                  className: "h-4 w-4",
                   strokeWidth: 2,
                 })}
                 <Typography
                   as="span"
                   variant="small"
                   className="font-normal"
-                  color={isLastItem ? "red" : "inherit"}
+                  color= "inherit"
                 >
                   {label}
                 </Typography>
@@ -127,6 +126,28 @@ function ProfileMenu() {
             </a>
           );
         })}
+        <MenuItem
+                onClick={() => {
+                  closeMenu();
+                  localStorage.clear()
+                  navigate("/")
+                }}
+                className="flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                   
+              >
+                {React.createElement(PowerIcon, {
+                  className: "h-4 w-4 text-red-500",
+                  strokeWidth: 2,
+                })}
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color="red"
+                >
+                  {" Sign Out"}
+                </Typography>
+              </MenuItem>
       </MenuList>
     </Menu>
   );
@@ -135,19 +156,19 @@ function ProfileMenu() {
 // nav list menu
 const navListMenuItems = [
   {
-    title: "@material-tailwind/html",
+    title: "VastFx services",
     description:
-      "Learn how to use @material-tailwind/html, packed with rich components and widgets.",
+      "Get to know all the services we provide.",
   },
   {
-    title: "@material-tailwind/react",
+    title: "VastFx Team",
     description:
-      "Learn how to use @material-tailwind/react, packed with rich components for React.",
+      "Get to know our team of experts.",
   },
   {
-    title: "Material Tailwind PRO",
+    title: "VastFx Events",
     description:
-      "A complete set of UI Elements for building faster websites in less time.",
+      "Get updated with all our recent and upcoming events.",
   },
 ];
 
@@ -198,12 +219,12 @@ function NavListMenu() {
           className="hidden w-[36rem] grid-cols-7 gap-3 overflow-visible lg:grid"
         >
           <Card
-            color="blue"
+            color="gray"
             shadow={false}
             variant="gradient"
             className="col-span-3 grid h-full w-full place-items-center rounded-md"
           >
-            <RocketLaunchIcon strokeWidth={1} className="h-28 w-28" />
+            <img strokeWidth={1} className="h-28 w-28" src={logo} />
           </Card>
           <ul className="col-span-4 flex w-full flex-col gap-1">
             {renderItems}
@@ -233,10 +254,7 @@ function NavList(props) {
       },
 
       { label: "Books", icon: BookOpenIcon, whereto: "/account/books" },
-      {
-        label: "Docs",
-        icon: CodeBracketSquareIcon,
-      },
+      
     ]
     : [
         {
@@ -246,10 +264,6 @@ function NavList(props) {
         },
 
         // { label: "Books", icon: BookOpenIcon, whereto: "/account/books" },
-        {
-          label: "Docs",
-          icon: CodeBracketSquareIcon,
-        },
       ];
 
   return (
@@ -281,7 +295,18 @@ export default function ComplexNavbar() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
   const token = useSelector(selectCurrentToken);
+  const [colorChange, setColorchange] = React.useState(false);
 
+  const changeNavbarColor = () =>{
+     if(window.scrollY >= 80){
+       setColorchange(true);
+     }
+     else{
+       setColorchange(false);
+     }
+  };
+
+  window.addEventListener('scroll', changeNavbarColor);
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -291,14 +316,16 @@ export default function ComplexNavbar() {
 
   return (
     <Navbar
-      className=" mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6"
-      color={isNavOpen?'gray':"transparent"}
+    className= 'newnav mx-auto max-w-screen-xl p-3 lg:rounded-full lg:pl-6 w-full'
+      style={{width:"100%", boxShadow:"inherit"}}
+
+      // color={colorChange || isNavOpen? 'gray':"transparent"}
     >
       <div className="relative mx-auto flex items-center ">
         <Typography
           as="a"
           href="#"
-          className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
+          className="mr-4 ml-2 cursor-pointer  font-medium"
           color={isNavOpen?'black':""}
         >
           <strong>
@@ -322,7 +349,7 @@ export default function ComplexNavbar() {
         </IconButton>
         {token? <ProfileMenu /> :   <a
               href='/login'
-              className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+              className="flex items-center gap-1 rounded-full pr-2 pl-0.5 lg:ml-auto"
             >
               {
                 React.createElement(ArrowRightOnRectangleIcon, {

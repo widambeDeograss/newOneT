@@ -8,24 +8,26 @@ import Registation from "./pages/Sign/Registration";
 import Admin from "./pages/Account/Admin/Admin";
 import RequireAuth from "./api/auth/RequireAuth";
 import { CustomAlertBar } from "./pages/Account/Components/Alerts";
-// import Landingpage from './pages/Land/Landingpage';
+import AdminRequireAuth from "./api/auth/AdminRequireAuth";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      {/* <CustomAlertBar/> */}
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Account />} />
             <Route element={<RequireAuth />}>
               <Route path="account/*" element={<Account />} />
-              <Route path="admin/*" element={<Admin />} />
             </Route>
+            <Route element={<AdminRequireAuth />}>
+              <Route path="admin/*" element={<Admin />} />
+              </Route>
             <Route path="login" element={<Login  />} />
             <Route path="register" element={<Registation />} />
           </Route>
         </Routes>
-      <CustomAlertBar/>
       </BrowserRouter>
     </div>
   );

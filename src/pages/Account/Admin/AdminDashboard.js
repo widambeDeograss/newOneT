@@ -11,43 +11,27 @@ import {
 } from "@material-tailwind/react";
 import ListItem from '../Components/ListItem';
 import ProgressCircle from '../Components/ProgressCircle';
+import { RoleUrls } from '../../../utils/Config'; 
+import { useDataFetch } from "../../../hooks/DataHook";
 
-const overviews = [
-  {
-    name: "Users",
-    value: "12 500"
-  },
-  {
-    name: "Subscriptions",
-    value: "12 500"
-  },
-  {
-    name: "Books",
-    value: "12 500"
-  },
-  {
-    name: "Unsubscribed Books",
-    value: "12 500"
-  }
-];
 
 const users = [
   {
     firstName: "John",
     lastName: "Smith",
-    job: "Web developer"
+    job: "1 subscriprion"
   },
   {
     firstName: "Jane",
     lastName: "Doe",
-    job: "Designer"
+    job: "0 subscriptions"
   }
 ];
 
 const orders = [
   {
     amount: "$234.99",
-    createdAt: "07-08-2021",
+    createdAt: "07-08-2023",
     id: "202108070001",
     status: "In Progress"
   },
@@ -81,6 +65,39 @@ const targets = [
 
 
 const AdminDashboard = () => {
+  const [stats, setStats] = React.useState([]);
+  const fetcher = useDataFetch();
+  // const books = ["art", "science", "history", "Geography"];
+
+  const loadData = async () => {
+    const response = await fetcher.fetch({ url: RoleUrls.dashboardStatistics });
+    if (response) {
+      setStats(response.data);
+    }
+  };
+
+  React.useEffect(() => {
+    loadData();
+  }, []);
+  const overviews = [
+    {
+      name: "Users",
+      value: stats.users
+    },
+    {
+      name: "Subscriptions",
+      value: stats.subscriptions
+    },
+    {
+      name: "Books",
+      value: stats.books
+    },
+    {
+      name: "Unsubscribed Books",
+      value: 0
+    }
+  ];
+  
   return (
     <div className="p-6">
   <div className="flex items-center justify-between">

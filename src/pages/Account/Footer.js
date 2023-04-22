@@ -1,5 +1,16 @@
 import PropTypes from "prop-types";
 import { Typography, IconButton } from "@material-tailwind/react";
+import {
+  faFacebookF,
+  faTwitter,
+  faGoogle,
+  faLinkedinIn,
+  faYoutubeSquare,
+  faInstagram,
+  faWhatsapp,
+  faGithub
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const year = new Date().getFullYear();
 
@@ -25,7 +36,7 @@ export function Footer({ title, description, socials, menus, copyright }) {
                 >
                   <IconButton color="white" className="rounded-full">
                     <Typography color={color}>
-                      <i className={`fa-brands fa-${name}`} />
+                      <FontAwesomeIcon icon={name} />
                     </Typography>
                   </IconButton>
                 </a>
@@ -33,7 +44,7 @@ export function Footer({ title, description, socials, menus, copyright }) {
             </div>
           </div>
           <div className="mx-auto mt-12 grid w-max grid-cols-2 gap-24 lg:mt-0">
-            {menus.map(({ name, items }) => (
+          {menus.map(({ name, items }) => (
               <div key={name}>
                 <Typography
                   variant="small"
@@ -79,54 +90,49 @@ export function Footer({ title, description, socials, menus, copyright }) {
 }
 
 Footer.defaultProps = {
-  title: "Material Tailwind",
+  title: "VastFx eBook",
   description:
-    "Easy to use React components for Tailwind CSS and Material Design.",
+    "Lern to trade, trade to earn.",
   socials: [
     {
       color: "blue",
-      name: "facebook",
-      path: "https://www.facebook.com/CreativeTim",
+      name:faFacebookF,
+      path: "https://instagram.com/vast_fx?igshid=YmMyMTA2M2Y=",
     },
     {
       color: "light-blue",
-      name: "twitter",
-      path: "https://www.twitter.com/creativetim",
+      name: faTwitter,
+      path: "https://instagram.com/vast_fx?igshid=YmMyMTA2M2Y=",
     },
     {
       color: "purple",
-      name: "instagram",
-      path: "https://www.instagram.com/creativetimofficial/",
+      name: faInstagram,
+      path: "https://instagram.com/vast_fx?igshid=YmMyMTA2M2Y=",
     },
     {
-      color: "pink",
-      name: "dribbble",
-      path: "https://www.dribbble.com/creativetim",
+      color: "green",
+      name:faWhatsapp,
+      path: "https://wa.me/message/Q62AHV6GATVVC1",
     },
     {
       color: "red",
-      name: "youtube",
-      path: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w",
-    },
-    {
-      color: "black",
-      name: "github",
-      path: "https://github.com/creativetimofficial/material-tailwind",
+      name:faYoutubeSquare,
+      path: "https://youtube.com/@Themoneyconscious",
     },
   ],
   menus: [
     {
       name: "useful links",
       items: [
-        { name: "About Us", path: "https://www.creative-tim.com/presentation" },
-        { name: "Blog", path: "https://www.creative-tim.com/blog" },
+        { name: "About Us", path: "" },
+        { name: "Blog", path: "" },
         {
-          name: "Github",
-          path: "https://www.github.com/creativetimofficial/material-tailwind?ref=mtk",
+          name: "Events",
+          path: "#",
         },
         {
-          name: "Free Products",
-          path: "https://www.creative-tim.com/templates/free?ref=mtk",
+          name: "Free Books",
+          path: "#",
         },
       ],
     },
@@ -134,33 +140,36 @@ Footer.defaultProps = {
       name: "other resources",
       items: [
         {
-          name: "MIT License",
-          path: "https://github.com/creativetimofficial/material-tailwind/blob/main/LICENSE.md?ref=mtk",
+          name: "Vast team",
+          path: "#",
         },
         {
           name: "Contribute",
-          path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CONTRIBUTING.md?ref=mtk",
+          path: "#",
         },
         {
-          name: "Change Log",
-          path: "https://github.com/creativetimofficial/material-tailwind/blob/main/CHANGELOG.md?ref=mtk",
+          name: "Vast events",
+          path: "https://instagram.com/vast_fx?igshid=YmMyMTA2M2Y=",
         },
         {
           name: "Contact Us",
-          path: "https://creative-tim.com/contact-us?ref=mtk",
+          path: "#",
         },
       ],
     },
   ],
   copyright: (
     <>
-      Copyright © {year} Material Tailwind by{" "}
+      Copyright © {year} VastFx 
+      
+      {" "}
       <a
-        href="https://www.creative-tim.com?ref=mtk"
+        href="#"
         target="_blank"
         className="text-blue-gray-500 transition-colors hover:text-blue-500"
       >
-        Creative Tim
+     
+     
       </a>
       .
     </>

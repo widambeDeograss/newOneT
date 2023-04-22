@@ -14,16 +14,18 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import Footer from "./Footer";
 
 
 export const Books = ({userdata}) => {
   const fetcher = useDataFetch()
-  // const books = ['data']
+  const [isLoading, setisLoading] = React.useState(false);
   const [UnSubscribedBooks, setUnSubscribedBooks] = React.useState([]);
   
   const [subscribedBooks, setSubscribedBooks] = React.useState([]);
 
   const loadData = async () => {
+     setisLoading(true);
       const response = await fetcher.fetch({url: BooksUrls.allBooks});
       const subresponse = await fetcher.fetch({url: BooksUrls.AllSubscriptions});
       console.log(response);
@@ -31,6 +33,7 @@ export const Books = ({userdata}) => {
       if(response){
         setUnSubscribedBooks(response.data);
         setSubscribedBooks(subresponse);
+        setisLoading(false);
       }
   }
 
@@ -43,7 +46,7 @@ export const Books = ({userdata}) => {
   // console.log(subscribedBooks);
 
   return (
-    <div style={{position:"relative", top:"80px",zIndex:3}} >
+    <div style={{position:"relative", top:"90px",zIndex:3}} >
 
       <Routes>
         <Route
@@ -55,16 +58,16 @@ export const Books = ({userdata}) => {
                   {"Subscribed"}
                 </Tab>
                 <Tab key={2} value={2}>
-                  {"UnSubscribed"}
+                  {"All Books"}
                 </Tab>
               </TabsHeader>
               <TabsBody>
                 <TabPanel key={1} value={1}>
-                  <BookList data={subscribedBooks} />
+                  <BookList data={subscribedBooks} isLoading={isLoading}/>
                 </TabPanel>
 
                 <TabPanel key={2} value={2}>
-                  <Unbook data={UnSubscribedBooks} />
+                  <Unbook data={UnSubscribedBooks} isLoading={isLoading} />
                 </TabPanel>
               </TabsBody>
             </Tabs>
@@ -75,6 +78,7 @@ export const Books = ({userdata}) => {
            element={<Book data={each.book.book} />} />
         ))}
       </Routes>
+      
     </div>
   );
 };

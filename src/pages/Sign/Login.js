@@ -12,9 +12,10 @@ import {
   faGoogle,
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
-// import "./login.css";
-import { Input, Button } from "@material-tailwind/react";
+import "./login.css";
+import { Input, Button, Typography } from "@material-tailwind/react";
 import { UserUrls } from "../../utils/Config";
+import logo from '../../Assets/Vastfx.PNG'
 
 
 const Login = ({ setUserdata }) => {
@@ -49,8 +50,9 @@ const Login = ({ setUserdata }) => {
         login:true
       });
       console.log(response);
+      const localStorageUser = {id:response.data.user.id, role:response.data.user.role}
 
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("user", JSON.stringify(localStorageUser));
       const userdata = {user:response.data.user, token:response.data.token}
       localStorage.setItem("token", response.data.token);
       dispatch(loginAuth({ ...userdata }));
@@ -58,7 +60,6 @@ const Login = ({ setUserdata }) => {
       setPassword("");
 
       if (response.data.user.role== 0) {
-        console.log('admin');
         navigate("/admin");
       } else {
         navigate("/account");
@@ -72,8 +73,8 @@ const Login = ({ setUserdata }) => {
     } catch (error) {
       console.log(error);
       if (!error?.respose) {
-        setErrorMsg("No server respose try again later");
-      } else if (error.respose?.status === 401) {
+        setErrorMsg("No server respose or invalid login credentials try again!");
+      } else if (error.respose?.status === 400) {
         setErrorMsg("incorrect password or email ");
       } else {
         setErrorMsg("login failed try again later");
@@ -86,8 +87,14 @@ const Login = ({ setUserdata }) => {
       <div className="forms-container">
         <div className="signin-signup">
           <form onSubmit={handleSubmit} className="sign-in-form">
+          <div class="text-center">
+                 
             <h2 className="title">Sign in</h2>
-
+                </div>
+     
+            <Typography  variant="h6" color="red" ref={errRef} >
+            {errorMsg}
+          </Typography>
             <div className="w-72 extra">
               <Input
                 label="email"
@@ -111,12 +118,12 @@ const Login = ({ setUserdata }) => {
             </div>
 
             <div className="flex w-max gap-4 extra">
-              <Button type="submit" color="blue">
+              <Button type="submit" className="btn">
                 Login
               </Button>
             </div>
 
-            <p className="social-text">Or Sign in with social platforms</p>
+            {/* <p className="social-text">Or Sign in with social platforms</p>
 
             <div className="social-media">
               <a href="#" className="social-icon">
@@ -131,7 +138,7 @@ const Login = ({ setUserdata }) => {
               <a href="#" className="social-icon">
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
@@ -140,9 +147,12 @@ const Login = ({ setUserdata }) => {
         <div className="panel left-panel">
           <div className="content">
             <h3>New here ?</h3>
+            <img
+                    class="mx-auto w-48 "
+                    src={logo}
+                    alt="logo" />
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
+            Welcome to vastFx where knowledge is power and profits are within reach! 
             </p>
             <a href="/register">
               <button className="btn transparent" id="sign-in-btn">

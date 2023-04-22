@@ -42,9 +42,16 @@ const AddBooks = () => {
   return (
     <div>
       <Card
-      className="flex items-center justify-between"
+      style={{ alignItems: "center" }}
       >
-        <CardBody className="flex flex-wrap gap-4"  >
+         <Typography variant="h4" color="blue-gray">
+        Add Book
+      </Typography>
+      <Typography color="gray" className="mt-1 font-normal">
+        Enter Book Details.
+      </Typography>
+        <CardBody className=""  >
+       
         <form enctype="multipart/form-data" onSubmit={handleSubmit} ref={formRef}>
           <div className="w-72 extra-input">
             <Input label=" Book Title" name="title"/>

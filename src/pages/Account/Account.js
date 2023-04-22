@@ -19,7 +19,9 @@ export const Account = ({userdata}) => {
           <Route path="books/*" element={<Books />} />
           <Route path="profile/*" element={<Profile />} />
         </Routes>
-      
+        <div className="">
+        <Footer />
+      </div>
     </div>
   );
 };

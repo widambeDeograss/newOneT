@@ -12,10 +12,11 @@ export const  BooksUrls = {
     BookSubscription: "http://128.199.15.73:7700/api/v1/book-subscriptions",
     AllSubscriptions: "http://128.199.15.73:7700/api/v1/list-book-subscriptions",
     SubscriptionById: "http://128.199.15.73:7700/api/v1/book-subscription/",
+    SingleBook:"http://128.199.15.73:7700/api/v1/book/"
 }
 
 export const RoleUrls = {
-    createOrUpdate: "http://localhost:8010/api/create",
+    dashboardStatistics: "http://128.199.15.73:7700/api/v1/dashboard-statistics",
     changeStatus: "http://localhost:8010/api/change-status",
     reset: "http://localhost:8010/api/reset",
     get: "http://localhost:8010/api/",

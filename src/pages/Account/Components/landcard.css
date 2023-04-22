@@ -1,7 +1,7 @@
 .costume-card{
     width: 15rem;
-    background-size: cover;
-    height: 20rem;
+    background-size: contain;
+    height: 15rem;
     margin-top: 20px;
     border-radius: 10px;
     display: flex;

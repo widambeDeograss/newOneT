@@ -30,15 +30,13 @@ export default function SinglePage(props) {
   const { pdf } = props;
 
   return (
-    <div>
-      <div >
-      </div>
+    <div style={{width:'100%',display:'flex',justifyContent:'center',flexDirection:'column'}}>
       <Document
         file={pdf}
         options={{ workerSrc: "/pdf.worker.js" }}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page pageNumber={pageNumber} scale={1}/>
+        <Page pageNumber={pageNumber} scale={2}/>
       </Document>
       <div className="flex w-max gap-4 p-4">
       <Typography className="text-sm font-medium text-gray-900">

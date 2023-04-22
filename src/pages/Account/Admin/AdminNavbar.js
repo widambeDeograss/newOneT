@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import '../navbar.css'
 import { FiHome ,FiBook, FiDollarSign, FiLogOut,FiChevronRight,FiSearch,FiMoon,FiSun } from 'react-icons/fi';
 import { UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
@@ -7,7 +7,7 @@ import { UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
 function Navbar(props) {
     const [sidebar, setSidebar] = useState(true);
     const [darkMode, setDarkMode] = useState(true);
-
+    const navigate = useNavigate()
     const handleToggleSidebar = () => setSidebar(!sidebar);
     const handleToggleDarkMode = () => setDarkMode(!darkMode);
 
@@ -59,14 +59,15 @@ function Navbar(props) {
                                     <span className="text nav-text">Books</span>
                                 </a>
                             </li>
-
-                           
-                           
+                     
                         </ul>
                     </div>
                     <div className="bottom-content">
                         <li className="">
-                            <a href="/login">
+                            <a onClick={() =>{
+                                localStorage.clear()
+                                navigate("/login")
+                            }}>
                                 <FiLogOut className="icon" />
                                 <span className="text nav-text">Logout</span>
                             </a>

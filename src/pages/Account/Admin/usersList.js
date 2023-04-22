@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Typography } from "@material-tailwind/react";
 import { UserUrls } from "../../../utils/Config";
 import { useDataFetch } from "../../../hooks/DataHook";
 import UserEdtModal from "../Components/UserEdtModal";
 import { useFormPost } from "../../../hooks/FormHook";
+import loading from '../../../Assets/output-onlinegiftools.gif';
+
 
 export const UsersList = () => {
   const fetcher = useDataFetch();
@@ -12,6 +14,8 @@ export const UsersList = () => {
   const [userId, setUserId] = useState(false);
   const [rowUser, setRowUser] = useState();
   const formPost = useFormPost()
+  const [isLoading, setisLoading] = React.useState(false);
+
 
   function closeModal() {
     setModalOpen(false);
@@ -23,10 +27,12 @@ export const UsersList = () => {
   }
 
   const loadData = async () => {
+    setisLoading(true)
     const response = await fetcher.fetch({ url: UserUrls.AllUserCostomers });
     console.log(response);
     if (response) {
       setusersList(response);
+      setisLoading(false)
     }
   };
 
@@ -47,6 +53,19 @@ export const UsersList = () => {
   React.useEffect(() => {
     loadData();
   }, []);
+  if (isLoading) {
+    return(
+        <div>
+        <div className="text-center px-4 py-8 " style={{minHeight:'300px'}}>
+            <img src={loading} class="mx-auto w-10 " style={{backgroundColor:'transparent', alignItems:'center'}}/>
+            <Typography className="mt-2" muted small>
+                  loading your books..
+              </Typography>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -153,7 +172,7 @@ export const UsersList = () => {
                       </a>
                     </td>
                     <UserEdtModal
-                   user={rowUser}
+                   user={person}
                    onClose={closeModal}
                    open={modalOpen}
                  />

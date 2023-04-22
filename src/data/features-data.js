@@ -2,29 +2,30 @@ import {
   StarIcon,
   ArrowPathIcon,
   FingerPrintIcon,
+  BookmarkSquareIcon,
 } from "@heroicons/react/24/solid";
 
 export const featuresData = [
   {
     color: "blue",
-    title: "Awarded Agency",
+    title: " Read books online",
     icon: StarIcon,
     description:
-      "Divide details about your product or agency work into parts. A paragraph describing a feature will be enough.",
+      "We provide the best forex books. Get access to ur books with an affordable subscription fee",
   },
   {
     color: "red",
-    title: "Free Revisions",
-    icon: ArrowPathIcon,
+    title: "Books content",
+    icon: BookmarkSquareIcon,
     description:
-      "Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious.",
+      "Our books have high and quality contents written by proffesionals and succesfull traders",
   },
   {
     color: "teal",
     title: "Verified Company",
     icon: FingerPrintIcon,
     description:
-      "Write a few lines about each one. A paragraph describing a feature will be enough. Keep you user engaged!",
+      "VastFx is a regstered company under the goverment of Tanzania. With cirtificates and Licence",
   },
 ];
 

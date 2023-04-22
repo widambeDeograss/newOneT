@@ -5,6 +5,8 @@ import AdminDashboard from './AdminDashboard'
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import { Users } from './Users';
 import { AssignBooks } from './AssignBooks';
+import { AdminVew } from './AdmViewBooks';
+import PdfViewer from '../pdfView/PdfViewer';
 
 const Admin = () => {
     return (

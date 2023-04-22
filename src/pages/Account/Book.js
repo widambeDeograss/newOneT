@@ -6,7 +6,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 const Book = (props) => {
 	console.log(props.data);
 	return (
-		<div style={{overflow:'hidden', width:'100%'}}>
+		<div style={{overflow:'hidden', width:'100%',minHeight:'100vh'}}>
 			 <PdfViewer pdfUrl={props.data}/>
 		</div>
 	)

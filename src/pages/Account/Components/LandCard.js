@@ -5,13 +5,13 @@ import {
     Typography,
     Avatar,
   } from "@material-tailwind/react";
-  import Img from '../../../Assets/prof.jpg'
+  // import Img from '../../../Assets/prof.jpg'
   import './landcard.css'
    
-  export default function LandCard() {
+  export default function LandCard({name,img}) {
     return (
-        <div className="costume-card" style={{backgroundImage:`url(${Img})`}}>
-            <span> Books Title</span>
+        <div className="costume-card" style={{backgroundImage:`url(${img})`}}>
+            <span>{name}</span>
         </div>
     );
   }
